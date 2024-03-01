@@ -8,9 +8,12 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
+  var tfControllemail = TextEditingController();
+  var tfControllpass= TextEditingController();
+
+  String email = '';
+  String password = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(height: 20),
 
                   TextField(
-                    controller: _emailController,
+                    controller: tfControllemail,
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
@@ -51,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   SizedBox(height: 20),
                   TextField(
-                    controller: _passwordController,
+                    controller: tfControllpass,
                     style: TextStyle(color: Colors.white),
                     textAlign: TextAlign.center,
                     decoration: InputDecoration(
@@ -66,8 +69,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => BottomBar()));
+                      setState(() {
+                        email =tfControllemail.text;
+                        password=tfControllpass.text;
+                      });
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BottomBar(email, password),
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40), // Buton içeriği içerisindeki boşluk ayarı
